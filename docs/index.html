@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Dienst">
+<meta name="theme-color" content="#f6f7f9" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0e1116" media="(prefers-color-scheme: dark)">
+<title>Dienstmonitor</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body><div class="wrap">
+
+<header><h1>Dienstmonitor</h1><span class="sub">Schiphol · vertragingen &amp; gatewissels</span></header>
+
+<div class="card">
+  <label for="add">Vluchtnummers volgen</label>
+  <div class="row">
+    <input id="add" placeholder="HV6002, AY1303" autocapitalize="characters" spellcheck="false">
+    <button class="primary" id="addBtn">Toevoegen</button>
+  </div>
+  <div class="sug" id="sug"></div>
+</div>
+
+<div class="bar">
+  <span><span class="dot off" id="dot"></span><span id="status">laden…</span></span>
+  <span><button class="ghost" id="notify">Meldingen aan</button>
+        <button class="ghost" id="refresh">Nu verversen</button></span>
+</div>
+
+<div id="list"><div class="empty">Voeg de vluchtnummers van je dienst toe.</div></div>
+
+<h2>Wijzigingen</h2>
+<div class="card"><ul class="log" id="log"><li class="sub" style="border:0">Nog niets gewijzigd.</li></ul></div>
+</div>
+<script src="app.js"></script>
+</body>
+</html>
