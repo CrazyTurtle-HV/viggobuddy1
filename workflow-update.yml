@@ -1,0 +1,33 @@
+name: Vluchten bijwerken
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "*/15 * * * *"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: vluchten
+  cancel-in-progress: false
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Vluchten ophalen
+        env:
+          SCHIPHOL_CLIENT_ID: ${{ secrets.SCHIPHOL_CLIENT_ID }}
+          SCHIPHOL_CLIENT_SECRET: ${{ secrets.SCHIPHOL_CLIENT_SECRET }}
+        run: python3 fetch.py
+
+      - name: Wijziging vastleggen
+        run: |
+          git config user.name "vluchten-bot"
+          git config user.email "bot@users.noreply.github.com"
+          git add docs/data.json
+          git diff --staged --quiet || git commit -m "data $(date -u +%H:%M)"
+          git push
